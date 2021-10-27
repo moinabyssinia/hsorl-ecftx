@@ -2,22 +2,15 @@ import os
 import pandas as pd
 
 dirHome = "C:\\Users\\mtadesse\\Hazen and Sawyer\\MIKE_Modeling_Group - Documents\\"\
-                "ECFTX\\extractedWellData\\011-allECFTXPermits-county-useclass\\"\
-                                "exportdFromShp"
+        "ECFTX\\extractedWellData\\011-allECFTXPermits-county-useclass\\analysis\\"\
+                "rawFile"
 
 os.chdir(dirHome)
 
-dat = pd.read_csv("ecftx_clipped_v4.txt")
-dat.drop(['FID', 'field_1'], axis = 1, inplace = True)
+dat = pd.read_csv("ecftx_clipped_v4_removedRepWells_with_traversingWells.csv")
 
-# get unique name
-# getName = lambda x: (x['row'])  + x['name']
-
-# dat['rowcolname'] = pd.DataFrame(list(map(getName, dat)))
-
-dat['rowcolname'] = dat.row.astype(str).str.cat(dat['columns'].astype(str), sep = "_") + "_" + dat['name']
 print(dat)
 
-# print unique wells
-print(dat['rowcolname'].unique())
-print(len(dat['rowcolname'].unique()))
+print(dat['id'].unique())
+print(len(dat['id'].unique()))
+print(len(dat['id']))

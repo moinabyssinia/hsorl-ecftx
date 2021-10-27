@@ -76,4 +76,8 @@ for my in monYear:
 
 # save truncated dat
 os.chdir(dirHome)
+
+# reverse the negative sign for the data where the repWells are removed
+dat['withdrawal'] = dat['withdrawal'] * -1
+ 
 dat.to_csv("ecftx_clipped_v4_removedRepWells.csv")
