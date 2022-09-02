@@ -1,7 +1,21 @@
+"""  
+Updated on Wed Sep 02 09:59:00 2022
+
+Read .wel data 
+
+@author: Michael Getachew Tadesse
+
+"""
+import os 
 import re
 import pandas as pd
 
+dir_home = 'D:\\MIKE_Modeling_Files\\Hazen and Sawyer\\MIKE_Modeling_Group - Documents\\GLRSTA\\data\\ECFTX\\extractedWellData'
+
+dir_out = 'D:\\MIKE_Modeling_Files\\Hazen and Sawyer\\MIKE_Modeling_Group - Documents\\GLRSTA\\data\\ECFTX\\extractedWellData\\01-rawFiles'
+
 # open and read file
+os.chdir(dir_home)
 file = open('ecftx_tr.20190329.wel')
 content = file.readlines()
 
@@ -23,4 +37,7 @@ for ii in range(3,len(content)):
         df = pd.concat([df, newDf], axis = 0)
     
 print(df)
-df.to_csv("ecftxWellDataCleaned.csv")
+
+
+os.chdir(dir_out)
+df.to_csv("ecftxWellDataCleaned_090222.csv")
