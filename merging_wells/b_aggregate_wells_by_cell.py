@@ -12,12 +12,14 @@ import numpy as np
 import pandas as pd
 
 
-dir_home = 'R:\\40715-013 UKFPLOS\\Data\\H&H_Data\\GW\\ecftx_files\\wells_100m_mesh_data'
+dir_home = 'R:\\40715-013 UKFPLOS\\Data\\H&H_Data\\GW\\ecftx_files\\ukb_pumping_wells\\to_Jeremy\\merged_100m\\rib'
 
 os.chdir(dir_home)
-dat = pd.read_csv('pws_wells_100_mesh_data_with_cell.csv')
-dat = dat[['x_utm_m', 'y_utm_m', 'layer', 'row', 'columns',
-       'withdrawal', 'name', 'mon', 'year', 'county', 'use_class', 'id', 'cell']]
+dat = pd.read_csv('rib_wells_100_mesh_data_with_cell.csv')
+
+# id column is only for the PWS wells
+dat = dat[['x_utm_m', 'y_utm_m', 'layer', 'ecftx_row', 'ecftx_columns',
+       'withdrawal', 'name', 'mon', 'year', 'county', 'use_class', 'cell']]
 
 dat['monyear'] = dat['mon'] + dat['year'].astype(str)
 
@@ -53,15 +55,15 @@ for cc in unq_cell:
         mon = newDf['mon'][0]
         year = newDf['year'][0]
         use_class = newDf['use_class'][0]
-        id = newDf['id'][0]
+        # id = newDf['id'][0]
         cell = newDf['cell'][0]
 
         withdrawal = newDf['withdrawal'].sum()
 
 
-        newDF2 = pd.DataFrame([x, y, layer, name, mon, year, withdrawal, use_class, id, cell]).T
+        newDF2 = pd.DataFrame([x, y, layer, name, mon, year, withdrawal, use_class, cell]).T
         newDF2.columns = ['x_utm_m', 'y_utm_m', 'layer', 'name', 'mon', 'year', 'withdrawal',
-                                'use_class', 'id', 'cell']
+                                'use_class', 'cell']
         
         # print(newDF2)
 
@@ -74,7 +76,7 @@ for cc in unq_cell:
 
 
 # save output
-df.to_csv('pws_wells_100_mesh_summed_withdrawal.csv')
+df.to_csv('rib_wells_100_mesh_summed_withdrawal.csv')
             
                 
                 

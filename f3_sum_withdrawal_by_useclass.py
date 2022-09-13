@@ -19,8 +19,14 @@ os.chdir(dir_home)
 
 dat = pd.read_csv('ecftxPermitsAll.csv')
 
+# checking only layers [1 2 3]
+dat = dat[(dat['layer'] == 1) | (dat['layer'] == 2) | (dat['layer'] == 3)]
 
 print(dat)
+print(dat['layer'].unique())
+
+
+
 
 uc = dat['use_class'].unique()
 yr = dat['year'].unique()
@@ -46,4 +52,4 @@ for uu in uc:
 
 
 
-withdrawal.to_csv('all_ECFTX_wells_withdrawal_sum_by_use_class.csv')
+withdrawal.to_csv('layers_1_2_3_ECFTX_wells_withdrawal_sum_by_use_class.csv')
